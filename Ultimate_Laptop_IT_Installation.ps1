@@ -353,7 +353,7 @@ Wait-BetweenSteps -Seconds 3
 # Optimisation du registre
 Log-Step "Optimisation du registre"
 
-function Set-LimpRegTweaksApply {
+function Set-RegTweaksApply {
     # Create Registry Keys
     $MultilineComment = @"
 Windows Registry Editor Version 5.00
@@ -657,20 +657,20 @@ Windows Registry Editor Version 5.00
 "SvcHostSplitThresholdInKB"=dword:ffffffff
 
 "@
-    Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry_Limp.reg" -Value $MultilineComment -Force
+    Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry.reg" -Value $MultilineComment -Force
     # edit reg file
-    $path = "$env:TEMP\Optimize_LocalMachine_Registry_Limp.reg"
+    $path = "$env:TEMP\Optimize_LocalMachine_Registry.reg"
     (Get-Content $path) -replace "\?", "$" | Out-File $path
     # import reg file
-    Regedit.exe /S "$env:TEMP\Optimize_LocalMachine_Registry_Limp.reg"
+    Regedit.exe /S "$env:TEMP\Optimize_LocalMachine_Registry.reg"
     Show-Header
     Write-Host "Registry Tweaks Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
-Set-LimpRegTweaksApply
+Set-RegTweaksApply
 
 # Start of Visual Tweaks
-function Set-LimpUserRegApply {
+function Set-UserRegApply {
     # Create Registry Keys
     $MultilineComment = @"
 Windows Registry Editor Version 5.00
@@ -949,17 +949,17 @@ Windows Registry Editor Version 5.00
 
 "@
 
-    Set-Content -Path "$env:TEMP\Visual_Tweaks_Limp.reg" -Value $MultilineComment -Force
+    Set-Content -Path "$env:TEMP\Visual_Tweaks.reg" -Value $MultilineComment -Force
     # edit reg file
-    $path = "$env:TEMP\Visual_Tweaks_Limp.reg"
+    $path = "$env:TEMP\Visual_Tweaks.reg"
     (Get-Content $path) -replace "\?", "$" | Out-File $path
     # import reg file
-    Regedit.exe /S "$env:TEMP\Visual_Tweaks_Limp.reg"
+    Regedit.exe /S "$env:TEMP\Visual_Tweaks.reg"
     Show-Header
-    Write-Host "Limpidit Visual Tweaks Applied." -ForegroundColor Green
+    Write-Host "Visual Tweaks Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
-Set-LimpUserRegApply
+Set-UserRegApply
 
 Wait-BetweenSteps -Seconds 3
 
