@@ -664,12 +664,12 @@ Windows Registry Editor Version 5.00
     # import reg file
     Regedit.exe /S "$env:TEMP\Optimize_LocalMachine_Registry_Limp.reg"
     Show-Header
-    Write-Host "Limpidit Registry Tweaks Applied." -ForegroundColor Green
+    Write-Host "Registry Tweaks Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
 Set-LimpRegTweaksApply
 
-# Start of Limpidit Visual Tweaks
+# Start of Visual Tweaks
 function Set-LimpUserRegApply {
     # Create Registry Keys
     $MultilineComment = @"
